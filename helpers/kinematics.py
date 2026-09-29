@@ -1,7 +1,7 @@
 """Kinematics helpers for the robot arm."""
 
 import math
-from config import L1, L2
+from helpers.config import L1, L2
 
 def forward_kinematics(theta1, theta2):
     """Return the end-effector position (x, y).
