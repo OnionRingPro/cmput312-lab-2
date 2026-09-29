@@ -17,9 +17,9 @@ def move(theta1, theta2):
 
 def main():
     test_configurations = [
-        # (30, 60),  
-        (0, 90),
-        # (-90, 45)
+        (90, 90),  
+        (0, -45),
+        (-90, 45)
     ]
 
     calibrate_zero()  # Calibrate the zero position before moving
