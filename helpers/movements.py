@@ -18,11 +18,12 @@ def calibrate_zero():
 def move_to_joint_angles(theta1, theta2):
     assert l1_motor_zero is not None and l2_motor_zero is not None, "Motors must be calibrated before moving."
     motor1_target = (theta1) * MOTOR1_DIRECTION * MOTOR1_RATIO + l1_motor_zero
-    motor2_target = (theta2) * MOTOR2_DIRECTION * MOTOR2_RATIO + l2_motor_zero
+    motor2_target = (theta2) * MOTOR2_DIRECTION * MOTOR2_RATIO + l2_motor_zero 
 
-    l1_motor.on_to_position(SpeedDPS(20), motor1_target, brake=True, block=False)
-    l2_motor.on_to_position(SpeedDPS(20), motor2_target, brake=True, block=True)
-    l1_motor.wait_while('running')
+    l1_motor.on_to_position(SpeedDPS(60), motor1_target, brake=True, block=True)
+    l2_motor.on_to_position(SpeedDPS(60), motor2_target, brake=True, block=False)
+    l1_motor.wait_while("running")
+    l2_motor.wait_while('running')
 
 def get_joint_angles():
     """Return the current joint angles (theta1, theta2) in degrees."""

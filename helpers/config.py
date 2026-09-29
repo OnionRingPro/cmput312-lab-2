@@ -11,7 +11,7 @@ MIN_POS = abs(L1 - L2)
 
 # Motor ratios
 MOTOR1_RATIO = 1.0
-MOTOR2_RATIO = 1.0
+MOTOR2_RATIO = 5 / 3
 
 # If the motor moves positive, the angle increases, then the direction parameter is 1.
 MOTOR1_DIRECTION = 1
