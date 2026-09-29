@@ -2,7 +2,6 @@
 
 import math
 
-
 def distance_between(point1, point2):
     """Return the Euclidean distance between two (x, y) points."""
     x1, y1 = point1
@@ -12,6 +11,7 @@ def distance_between(point1, point2):
 
 def angle_between(vertex, point1, point2):
     """Return the smaller angle between two lines in degrees.
+    cos(theta) = (v1 . v2) / (|v1| * |v2|)
     """
     vx, vy = vertex
     vector1 = (point1[0] - vx, point1[1] - vy)
