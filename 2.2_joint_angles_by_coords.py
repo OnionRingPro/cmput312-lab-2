@@ -7,11 +7,8 @@ def move(theta1, theta2):
     """Move the robot arm to the specified joint angles (in degrees)."""
     move_to_joint_angles(theta1, theta2)
     theta1_encoder, theta2_encoder = get_joint_angles()  # Get the actual joint angles after moving
-
-
     encoder_pos = forward_kinematics(theta1_encoder, theta2_encoder)
     ideal_pos = forward_kinematics(theta1, theta2)
-
 
     return theta1_encoder, theta2_encoder, encoder_pos, ideal_pos
 
@@ -28,13 +25,11 @@ def main():
 
     for theta1, theta2 in test_configurations:
         theta1_encoder, theta2_encoder, encoder_pos, ideal_pos = move(theta1, theta2)
-        # text += f"Moved to angles: [theta1={theta1}, theta2={theta2}]"
-        # Encoder angles: [theta1={theta1_encoder:.2f}, theta2={theta2_encoder:.2f}]
-        # Ideal position: x={ideal_pos[0]:.3f}, y={ideal_pos[1]:.3f}
-        # Encoder position: x={encoder_pos[0]:.3f}, y={encoder_pos[1]:.3f}
-        # ================================================================================
-        # ""
-    write_to_file(text)
+        text += f"theta encoder: [{theta1_encoder}, {theta2_encoder}]\n"
+        text += f"position encoder: (x,y) = ({encoder_pos})\n"
+        text += f"position ideal: (x, y) = ({ideal_pos})\n"
+        text += "=================================================\n"
+    write_to_file(text, filename='2.2_log.txt')
 
 if __name__ == '__main__':
     main()
