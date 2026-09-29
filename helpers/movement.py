@@ -1,8 +1,18 @@
+#!/usr/bin/env python3
 from ev3dev2.motor import OUTPUT_A, OUTPUT_B, LargeMotor, SpeedDPS, SpeedPercent
 from helpers.config import MAX_POS, MIN_POS
 import math
 
-def move_to_position(x_pos: float, y_pos: float):
-    dist = math.sqrt((x_pos * x_pos) + (y_pos * y_pos))
-    assert dist <= MAX_POS and dist >= MIN_POS
-    
+l1_motor = LargeMotor(OUTPUT_A)
+l2_motor = LargeMotor(OUTPUT_B)
+
+def move_l1_to(angle: float):
+    pass
+
+def get_motor_angles() -> tuple:
+    """Returns both motor angles
+
+    Returns:
+        tuple[float, float]: Returns both motor angles with L1 being at index 0 and L2 being at index 1
+    """
+    return l1_motor.degrees, l2_motor.degrees
