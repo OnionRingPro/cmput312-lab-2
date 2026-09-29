@@ -2,8 +2,8 @@
 Store every configs like L1, L2
 """
 
-L1 = 0.109
-L2 = 0.113
+L1 = 0.115
+L2 = 0.115
 
 MAX_POS = L1 + L2
 MIN_POS = abs(L1 - L2)
