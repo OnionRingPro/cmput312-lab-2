@@ -25,10 +25,11 @@ def main():
 
     for theta1, theta2 in test_configurations:
         theta1_encoder, theta2_encoder, encoder_pos, ideal_pos = move(theta1, theta2)
-        text += f"theta encoder: [{theta1_encoder}, {theta2_encoder}]\n"
-        text += f"position encoder: (x,y) = ({encoder_pos})\n"
-        text += f"position ideal: (x, y) = ({ideal_pos})\n"
+        text += "theta encoder: [{:.2f}, {:.2f}]\n".format(theta1_encoder, theta2_encoder)
+        text += "position encoder: (x,y) = ({:.2f}, {:.2f})\n".format(encoder_pos[0], encoder_pos[1])
+        text += "position ideal: (x, y) = ({:.2f}, {:.2f})\n".format(ideal_pos[0], ideal_pos[1])
         text += "=================================================\n"
+    print(text)
     write_to_file(text, filename='2.2_log.txt')
 
 if __name__ == '__main__':

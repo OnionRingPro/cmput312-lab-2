@@ -14,16 +14,16 @@ def forward_kinematics(theta1, theta2):
     return x, y
 
 
-def inverse_kinematics(x, y, error=ERROR, initial_guess=INITIAL_GUESS):
-    """
-    Return an analytical and a numerical inverse-kinematics solution in degrees. 
-    Each angle is normalized to the range [-180, 180).
-    """
-    theta1, theta2 = numerical_inverse_kinematics(x, y, error, initial_guess)
-    theta1_analytical, theta2_analytical = analytical_inverse_kinematics(x, y)
-    return (theta1, theta2), (theta1_analytical, theta2_analytical)
+# def inverse_kinematics(x, y, error=ERROR, initial_guess=INITIAL_GUESS):
+#     """
+#     Return an analytical and a numerical inverse-kinematics solution in degrees. 
+#     Each angle is normalized to the range [-180, 180).
+#     """
+#     theta1, theta2 = numerical_inverse_kinematics(x, y, error, initial_guess)
+#     theta1_analytical, theta2_analytical = analytical_inverse_kinematics(x, y)
+#     return (theta1, theta2), (theta1_analytical, theta2_analytical)
     
-def numerical_inverse_kinematics(x, y, error, initial_guess):
+def numerical_inverse_kinematics(x, y, error=ERROR, initial_guess=INITIAL_GUESS):
     """
     Return a numerical inverse-kinematics solution in degrees. 
     Each angle is normalized to the range [-180, 180).
