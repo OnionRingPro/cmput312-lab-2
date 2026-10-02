@@ -9,7 +9,7 @@ MAX_POS = L1 + L2
 MIN_POS = abs(L1 - L2)
 ERROR = 0.001 # the small error possible in the measurement
 MAX_INTERATION = 1000
-INITIAL_GUESS = (10, 30) # initial guess for IK newton method, (10deg, 30deg)
+INITIAL_GUESS = (0, 90) # initial guess for IK newton method, (10deg, 30deg)
 
 # Motor ratios
 MOTOR1_RATIO = 1.0

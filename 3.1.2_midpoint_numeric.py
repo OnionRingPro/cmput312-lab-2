@@ -58,7 +58,7 @@ def main():
     theta1_read, theta2_read = get_joint_angles()
     theta1_calc, theta2_calc = get_computed_angles()
     text += "Moved to position: [x={}, y={}]\n".format(x, y)
-    text += "Analytical angles: [theta1={:.2f}, theta2={:.2f}]\n".format(theta1, theta2)
+    text += "Numerical angles: [theta1={:.2f}, theta2={:.2f}]\n".format(theta1, theta2)
     text += "Final position: x={:.3f}, y={:.3f}\n".format(final_pos[0], final_pos[1])
     text += "Actual angles: [theta1={:.2f}, theta2={:.2f}]\n".format(theta1_read, theta2_read)
     text += "Computed angles: [theta1={:.2f}, theta2={:.2f}]\n".format(theta1_calc, theta2_calc)
