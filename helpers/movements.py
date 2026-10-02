@@ -15,11 +15,10 @@ l2_motor_current = 0
 def calibrate_zero():
     """Calibrate the zero position of the robot arm."""
     global l1_motor_zero, l2_motor_zero, l1_motor_current, l2_motor_current
-    l1_motor_zero = l1_motor.degrees
-    l2_motor_zero = l2_motor.degrees
-    l1_motor_current = 0
-    l2_motor_current = 0
-
+    l1_motor_current = -90
+    l2_motor_current = -91
+    l1_motor_zero = l1_motor.degrees - l1_motor_current
+    l2_motor_zero = l2_motor.degrees - l1_motor_current - l2_motor_current*MOTOR2_RATIO
 
 def move_to_joint_angles(theta1, theta2):
     # assert l1_motor_zero is not None and l2_motor_zero is not None, "Motors must be calibrated before moving."
