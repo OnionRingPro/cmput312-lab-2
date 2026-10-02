@@ -12,7 +12,7 @@ touch_sensor = TouchSensor(INPUT_1)
 
 def move(x,y):
     """Move the robot arm to the specified (x, y) position numerically."""
-    theta1, theta2 = move_to_position(x, y, numeric=False)
+    theta1, theta2 = move_to_position(x, y, numeric=True)
     (x, y) = forward_kinematics(theta1, theta2)
     return theta1, theta2, (x, y)
 
