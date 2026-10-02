@@ -4,7 +4,7 @@ from ev3dev2.sensor import INPUT_1
 from ev3dev2.sensor.lego import TouchSensor
 
 from helpers.kinematics import forward_kinematics
-from helpers.movements import get_joint_angles, move_to_joint_angles, calibrate_zero, move_to_position
+from helpers.movements import get_joint_angles, get_computed_angles, set_position, move_to_joint_angles, calibrate_zero, move_to_position
 from helpers.write_files import write_to_file
 
 lcd = Display()
@@ -50,11 +50,18 @@ def main():
     text += "Recorded point 1: x={:.3f}, y={:.3f}\n".format(point1[0], point1[1])
     point2 = record_point(2)
     text += "Recorded point 2: x={:.3f}, y={:.3f}\n".format(point2[0], point2[1])
+
+    set_position()
+
     x, y = get_midpoint(point1, point2)
     theta1, theta2, final_pos = move(x, y)
+    theta1_read, theta2_read = get_joint_angles()
+    theta1_calc, theta2_calc = get_computed_angles()
     text += "Moved to position: [x={}, y={}]\n".format(x, y)
     text += "Numerical angles: [theta1={:.2f}, theta2={:.2f}]\n".format(theta1, theta2)
     text += "Final position: x={:.3f}, y={:.3f}\n".format(final_pos[0], final_pos[1])
+    text += "Actual angles: [theta1={:.2f}, theta2={:.2f}]\n".format(theta1_read, theta2_read)
+    text += "Computed angles: [theta1={:.2f}, theta2={:.2f}]\n".format(theta1_calc, theta2_calc)
     text += "================================================================================\n\n\n"
     print(text)
     write_to_file(text, "out/position_results.txt")

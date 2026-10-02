@@ -26,13 +26,24 @@ def move_to_joint_angles(theta1, theta2):
     motor1_target = (theta1 - l1_motor_current) * MOTOR1_DIRECTION * MOTOR1_RATIO
     motor2_target = (theta2 - l2_motor_current) * MOTOR2_DIRECTION * MOTOR2_RATIO
 
-    l1_motor.on_for_degrees(SpeedDPS(60), motor1_target, brake=False, block=False)
-    l2_motor.on_for_degrees(SpeedDPS(60), motor2_target+motor1_target, brake=False, block=False)
+    l1_motor.on_for_degrees(SpeedDPS(60), motor1_target,  brake=False, block=False)
+    l2_motor.on_for_degrees(SpeedDPS(60), motor1_target, brake=False, block=False)
     l1_motor.wait_while("running")
     l2_motor.wait_while('running')
 
+    l2_motor.on_for_degrees(SpeedDPS(60), motor2_target, brake=False, block=True)
+    
     l1_motor_current = theta1
     l2_motor_current = theta2
+
+def get_computed_angles():
+    return l1_motor_current, l2_motor_current
+
+def set_position():
+    global l1_motor_current, l2_motor_current
+    theta1, theta2 = get_joint_angles()
+    l1_motor_current = theta1
+    l2_motor_current = theta2 - theta1
 
 def get_joint_angles():
     """Return the current joint angles (theta1, theta2) in degrees."""
@@ -49,7 +60,8 @@ def move_to_position(x, y, numeric=True):
     """
     theta1, theta2 = (0,0)
     if numeric:
-        theta1, theta2 = numerical_inverse_kinematics(x,y)
+        set_position()
+        theta1, theta2 = numerical_inverse_kinematics(x,y, initial_guess=(l1_motor_current, l2_motor_current))
     else:
         theta1, theta2 = analytical_inverse_kinematics(x,y)
 
