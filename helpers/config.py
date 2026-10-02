@@ -15,8 +15,4 @@ INITIAL_GUESS = (0, 90) # initial guess for IK newton method, (10deg, 30deg)
 MOTOR1_RATIO = 1.0
 MOTOR2_RATIO = 5 / 3
 
-# If the motor moves positive, the angle increases, then the direction parameter is 1.
-MOTOR1_DIRECTION = 1
-MOTOR2_DIRECTION = 1
-
 FILE_NAME = "log.txt"

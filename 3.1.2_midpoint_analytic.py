@@ -54,14 +54,16 @@ def main():
     set_position()
 
     x, y = get_midpoint(point1, point2)
+
+    # theta1_initial, theta2_initial = get_joint_angles()
     theta1, theta2, final_pos = move(x, y)
-    theta1_read, theta2_read = get_joint_angles()
-    theta1_calc, theta2_calc = get_computed_angles()
+    # theta1_final, theta2_final = get_joint_angles()
     text += "Moved to position: [x={}, y={}]\n".format(x, y)
     text += "Analytical angles: [theta1={:.2f}, theta2={:.2f}]\n".format(theta1, theta2)
     text += "Final position: x={:.3f}, y={:.3f}\n".format(final_pos[0], final_pos[1])
-    text += "Actual angles: [theta1={:.2f}, theta2={:.2f}]\n".format(theta1_read, theta2_read)
-    text += "Computed angles: [theta1={:.2f}, theta2={:.2f}]\n".format(theta1_calc, theta2_calc)
+    # text += "Measured Angles:\n"
+    # text += "  Initial angles: [theta1={:.2f}, theta2={:.2f}]\n".format(theta1_initial, theta2_initial)
+    # text += "  Final angles: [theta1={:.2f}, theta2={:.2f}]\n".format(theta1_final, theta2_final)
     text += "================================================================================\n\n\n"
     print(text)
     write_to_file(text, "out/position_results.txt")
