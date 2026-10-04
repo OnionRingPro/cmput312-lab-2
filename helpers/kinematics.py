@@ -51,9 +51,10 @@ def numerical_inverse_kinematics(x, y, error=ERROR, initial_guess=INITIAL_GUESS)
         # Calculate the determinant of the Jacobian
         det_J = J11 * J22 - J12 * J21
 
-        if det_J < 1e-8:
-            # raise ValueError("Jacobian is singular; cannot compute inverse kinematics.")
-            theta2 += 1.0 # give a small disturbance and leave the singular point
+        if abs(det_J) < 1e-8:
+            # Move slightly away from a singular configuration before applying
+            # the inverse-Jacobian update.
+            theta2 += 1.0
             continue
 
         # Calculate the inverse of the Jacobian matrix
@@ -63,11 +64,21 @@ def numerical_inverse_kinematics(x, y, error=ERROR, initial_guess=INITIAL_GUESS)
         inv_J22 = J11 / det_J
 
         # Update joint angles using the inverse Jacobian and position errors
-        delta_theta1 = inv_J11 * error_x + inv_J12 * error_y
-        delta_theta2 = inv_J21 * error_x + inv_J22 * error_y
+        delta_theta1 = math.degrees(inv_J11 * error_x + inv_J12 * error_y)
+        delta_theta2 = math.degrees(inv_J21 * error_x + inv_J22 * error_y)
 
-        theta1 += math.degrees(delta_theta1)
-        theta2 += math.degrees(delta_theta2)
+        # Close to a singularity the inverse Jacobian can produce an enormous
+        # Newton step.  Scale both joint updates together so the direction is
+        # preserved while keeping the iteration stable.
+        max_step = 15.0
+        largest_step = max(abs(delta_theta1), abs(delta_theta2))
+        if largest_step > max_step:
+            scale = max_step / largest_step
+            delta_theta1 *= scale
+            delta_theta2 *= scale
+
+        theta1 += delta_theta1
+        theta2 += delta_theta2
     raise RuntimeError("Numerical IK did not converge")
 
     
