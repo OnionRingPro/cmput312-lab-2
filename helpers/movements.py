@@ -48,6 +48,7 @@ def move_to_joint_angles(theta1, theta2):
     l1_motor.on_for_degrees(SpeedDPS(60), motor1_target, brake=False, block=False)
     # l2_motor.on_for_degrees(SpeedDPS(60), motor1_target, brake=False, block=True)
     l2_motor.on_for_degrees(SpeedDPS(60), motor1_target + motor2_target, brake=False, block=True)
+    l1_motor.wait_while("running")
 
     l1_motor_current = theta1
     l2_motor_current = theta2
